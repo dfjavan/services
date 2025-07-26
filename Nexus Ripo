@@ -1,1 +1,11 @@
+درصورتی که استفاده از ریپو داخلی  استفاده می کنیم  هنگام پول با مشکل اس اس ال مواجه هستیم برای رفع مشکل :
+#on podman
+/etc/containers/registries.conf
 
+unqualified-search-registries = ["registry.access.redhat.com", "docker.io"]
+
+[[registry]]
+prefix = "myregistry.example.com"
+insecure = true
+blocked = false
+location = "ip nexus ripo:port"
