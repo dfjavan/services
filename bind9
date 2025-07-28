@@ -1,1 +1,29 @@
+#docker or podman method
+1- change chown host |  host directory chown= /etc/bind chown  command ls -ln 
+__________________________________________________________________
+#2creat db.resaa  and cp \
 
+;
+; BIND reverse data file for broadcast zone
+;
+$TTL    120
+@       IN      SOA     ns1.soscomm.ir. root.soscomm.ir. (
+                          1             ; Serial
+                         120            ; Refresh
+                          60            ; Retry
+                          60    ; Expire
+                          60 )  ; Negative Cache TTL
+;
+@               IN      NS    ns1.soscomm.ir.
+ns1             IN      A     192.168.5.10
+mdm             IN      A     192.168.5.11
+elk             IN      A     192.168.5.12
+hodhod          IN      A     192.168.5.13
+pbx             IN      A     192.168.5.14
+pcscf           IN      A     192.168.5.15
+postgres        IN      A     192.168.5.16
+prometheus      IN      A     192.168.5.17
+repo            IN      A     192.168.5.18
+docker          IN      A     192.168.5.19
+[root@dns bind]#
+____________________________________________________________
