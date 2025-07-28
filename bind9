@@ -27,3 +27,49 @@ repo            IN      A     192.168.5.18
 docker          IN      A     192.168.5.19
 [root@dns bind]#
 ____________________________________________________________
+#named.conf.option
+
+#options {
+#directory "/var/cache/bind";
+
+
+options {
+   # listen-on port 53 { any; };
+   # listen-on-v6 port 53 { any; };
+
+    directory "/var/cache/bind";
+
+    allow-query { any; };
+   # allow-recursion { 192.168.5.0/24; 192.168.21.0/24 };  dar sort nadashtan zone bro az8.8.8.8.8 bepors
+
+   // forwarders {
+     //   8.8.8.8;    // Google DNS
+     //  8.8.4.4;    // Google DNS
+   // };
+    #forward only;   // Strictly use forwarders (disable root hints)
+
+    // DNSSEC validation (recommended for security)
+    dnssec-validation auto;
+
+    // Logging (customize paths as needed)
+    version "Not disclosed"; // Hide BIND version for security
+    querylog yes; // Disable query logging (enable temporarily for debugging)
+
+};
+_______________________________________________________________________________
+named.conf.local
+
+//
+// Do any local configuration here
+//
+
+// Consider adding the 1918 zones here, if they are not used in your
+// organization
+//include "/etc/bind/zones.rfc1918";
+
+zone "soscomm.ir" {
+    type master;
+    file "/etc/bind/db.soscomm";
+};
+[root@dns bind]#
+_________________________________________________________________________
