@@ -11,3 +11,11 @@ blocked = false
 location = "ip nexus ripo:port"
 _______________________________________________________________________________________________________________
 sudo dnf install -y http://192.168.21.200:8081/repository/rpm/reporpms/EL-9-x86_64/pgdg-redhat-repo-latest.noarch.rpm
+
+###########################################################################################################
+برای ساخت فایل ovf ازیک vm  و انتقال آن به هارد اکسترنال
+اول ovf tool نصب شود 
+https://developer.broadcom.com/tools/open-virtualization-format-ovf-tool/latest
+
+انجام عملیات
+./ovftool  vi://f.hirboud:Df2921260@@vcenter.resaa.net/Tehran-Office/vm/Infrastructure/nexus-projects ../root/mnt/Nexus.ovf
