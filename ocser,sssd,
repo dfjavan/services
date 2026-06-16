@@ -1,0 +1,56 @@
++----------------+
+| LDAP Server    |
+| OpenLDAP       |
++-------+--------+
+        |
+        |
++-------v--------+
+| SSSD           |
+| Cache + Auth   |
++-------+--------+
+        |
+        |
++-------v--------+
+| PAM            |
+| Authentication |
++-------+--------+
+        |
+        |
++-------v--------+
+| OCSERV         |
+| VPN Server     |
++----------------+
+_________________________________________________________________________
+#only LDAP
+apt install slapd ldap-utils   
+ pass=Df2921260@
+ ___________________________________________________________
+ #install SSSD
+apt install sssd sssd-tools libpam-sss libnss-sss
+
+/etc/sssd/sssd.conf
+----------------------------------
+[sssd]
+services = nss,pam
+config_file_version = 2
+domains = ldap
+
+[domain/ldap]
+id_provider = ldap
+auth_provider = ldap
+
+ldap_uri = ldap://192.168.1.10
+
+ldap_search_base = dc=fhvip,dc=local
+
+ldap_default_bind_dn = cn=admin,dc=fhvip,dc=local
+ldap_default_authtok = MySecretPassword
+
+cache_credentials = true
+
+enumerate = false
+---------------------------------
+#permison
+chmod 600 /etc/sssd/sssd.conf
+
+_________________________
