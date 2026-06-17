@@ -36,28 +36,33 @@ apt install sssd sssd-tools libpam-sss libnss-sss
 /etc/sssd/sssd.conf
 ----------------------------------
 [sssd]
-services = nss,pam
-config_file_version = 2
-domains = ldap
+services = nss, pam
+domains = resaa.net
 
-[domain/ldap]
-id_provider = ldap
-auth_provider = ldap
+[domain/resaa.net]
+id_provider = ad
+auth_provider = ad
+access_provider = ad
 
-ldap_uri = ldap://172.16.100.1
-
-ldap_search_base = dc=resaa,dc=net
-
-ldap_default_bind_dn = cn=f.hirboud,dc=resaa,dc=net
-ldap_default_authtok = Df2921260@
-
-ldap_id_use_start_tls = false
-ldap_tls_reqcert = never
+ad_domain = resaa.net
+krb5_realm = RESAA.NET
+ad_server = dc.resaa.net
 
 cache_credentials = true
 
-enumerate = false
+use_fully_qualified_names = false
 
+fallback_homedir = /home/%u
+default_shell = /bin/bash
+
+ldap_id_mapping = true
+
+--------------------------------------------------------------------------
+#test config
+sssctl config-check 
+# test =   Messages generated during configuration merging: 0
+#login
+realm join resaa.net -U f.hirboud
 
 #test
 ldapsearch -x -H ldap://172.16.100.1 -D "f.hirboud@resaa.net" -w 'Df2921260@' -b "dc=resaa,dc=net"
